@@ -4,6 +4,9 @@
 <br>
 <br>
 <section>
+    <h2>Campos obligatorios <Span class = "red"> * </span> </h2>
+    <hr class="red">
+    
     <form action="{{route('InternaStore')}}" id="solicitud-interna" accept-charset="UTF-8" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="panel-group ficha-collapse" id="accordion">
@@ -19,24 +22,20 @@
                     <div class="panel-body">
                         <div class="form-row">
                             <div class="form-group">
-                                <div class="form-group col-xs-4">                                    
-                                    <label class="col-sm-12 control-label" for="Nombre">Nombre:</label>
-                                    <input class="form-control" value="" id="Nombre" name="Nombre" placeholder="Nombre" type="text">
-                                </div>
                                 <div class="form-group col-xs-4">
-                                    <label class="col-sm-12 control-label" for="ApellidoP">Apellido Paterno:</label>
+                                    <label class="col-sm-12 control-label" for="ApellidoP"><Span class = "red"> * </span>Apellido Paterno:</label>
                                     <input class="form-control" value="" id="ApellidoP" name="ApellidoP" placeholder="Apellido Paterno" type="text">
                                 </div>
                                 <div class="form-group col-xs-4">
-                                    <label class="col-sm-12 control-label" for="ApellidoM">Apellido Materno:</label>
+                                    <label class="col-sm-12 control-label" for="ApellidoM"><Span class = "red"> * </span>Apellido Materno:</label>
                                     <input class="form-control" value="" id="ApellidoM" name="ApellidoM" placeholder="Apellido Materno" type="text">
+                                </div>
+                                <div class="form-group col-xs-4">                                    
+                                    <label class="col-sm-12 control-label" for="Nombre"><Span class = "red"> * </span>Nombre:</label>
+                                    <input class="form-control" value="" id="Nombre" name="Nombre" placeholder="Nombre" type="text">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="form-group col-xs-4">                                    
-                                    <label class="col-sm-2 control-label" for="dir">Dirección:</label>
-                                    <input class="form-control" value="" id="dir" name="dir" placeholder="Direccion" type="text">
-                                </div>
                                 <div class="form-group col-xs-4">
                                     <label class="col-sm-12 control-label" for="tel">Teléfono:</label>
                                     <input class="form-control" value="" id="tel" name="tel" placeholder="Telefono" type="text">
@@ -45,12 +44,73 @@
                                     <label class="col-sm-12 control-label" for="correoE">Correo Electrónico:</label>
                                     <input class="form-control" value="" id="correoE" name="correoE" placeholder="Correo Electronico" type="text">
                                 </div>
+                                <!--
+                                <div class="form-group col-xs-4">                                    
+                                    <label class="col-sm-2 control-label" for="dir">Dirección:</label>
+                                    <input class="form-control" value="" id="dir" name="dir" placeholder="Direccion" type="text">
+                                </div>
+                            -->
+                                <div class="form-group col-xs-4">
+                                    <label class="col-sm-12 control-label" for="Calle">Calle:</label>
+                                    <input class="form-control" id="Calle" name="Calle" type="text">
+                                </div>
+                                <div class="form-group col-xs-4">
+                                    <label class="col-sm-12 control-label" for="numeroE">Numero Exterior:</label>
+                                    <input class="form-control" id="numeroE" name="numeroE" type="text">
+                                </div>
+                                <div class="form-group col-xs-4">
+                                    <label class="col-sm-12 control-label" for="numeroI">Numero Interior:</label>
+                                    <input class="form-control" id="numeroI" name="numeroI" type="text">
+                                </div>
+                                <div class="form-group col-xs-4">
+                                    <label class="col-sm-12 control-label" for="codigoP">Codigo Postal:</label>
+                                    <input class="form-control" id="codigoP" name="codigoP" type="text">
+                                </div>
+                                <div class="form-group col-xs-4">
+                                    <label class="col-sm-12 control-label" for="colonia">Colonia:</label>
+                                    <input class="form-control" id="colonia" name="colonia" type="text">
+                                </div>
+                                <div class="form-group col-xs-4">
+                                    <label class="col-sm-12 control-label" for="ciudad">Ciudad:</label>
+                                    <input class="form-control" id="ciudad" name="ciudad" type="text">
+                                </div>
+                                <div class="form-group col-xs-4">
+                                    <label class="col-sm-12 control-label" for="estadoDir">Estado:</label>
+                                    <input class="form-control" id="estadoDir" name="estadoDir" type="text">
+                                </div>
                             </div>
-                            <div class="form-group">
+                            <!--<div class="form-group">
                                 <div class="form-group col-xs-4">                                    
                                     <label class="col-sm-12 control-label" for="curp">CURP o Numero de psaporte:</label>
                                     <input class="form-control" value="" id="curp" name="curp" placeholder="CURP o Numero de psaporte" type="text">
                                 </div>
+                            </div>-->
+                            <div class="form-group">
+                                <div class="form-group col-xs-4">    
+                                    <label for=""> <Span class = "red"> * </span> CURP o Número de pasaporte:</label>
+                                        <select class="form-control" id="status" name="status" onChange="mostrar(this.value);">
+                                            <option value="Otro">&nbsp;</option>
+                                            <option value="CURP">CURP</option>
+                                            <option value="Pasaporte">Pasaporte</option>
+                                        </select>
+                                </div>
+                            <!-- <div class="form-group col-md-5">
+                                    error('CURP')
+                                        <button type="button" class="btn btn-primary btn-xs disabled">
+                                            {$message}} <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                                        </button>
+                                        <br>
+                                        <br>
+                                    enderror
+                                    <label class="col-sm-12 control-label" for="CURP">CURP o número de pasaporte :</label>
+                                    <input class="form-control" value="{old('CURP')}}" id="CURP" name="CURP" placeholder="CURP o número de pasaporte " type="text">
+                                </div> -->
+                            </div>
+                            <div class="form-group" id="CURP" style="display: none;">
+                                <input class="form-control" value="{{old('CURP')}}" id="CURP" name="CURP" placeholder="CURP" type="text">
+                            </div>
+                            <div class="form-group" id="Pasaporte" style="display: none;">
+                                <input class="form-control" value="{{old('CURP')}}" id="CURP" name="CURP" placeholder="Número de pasaporte " type="text">
                             </div>
                         </div>
                     </div>
@@ -99,7 +159,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-group col-xs-4">                                    
-                                    <label class="col-sm-12 control-label" for="Materias">Materias a cursar:</label>
+                                    <label class="col-sm-12 control-label" for="Materias">Materias a cursar <br> (Máximo 6 materias)</label>
                                     <select id="Materias" name="Materias[]" multiple class="form-control" >
                                         @foreach ($materia as $materias)
                                             <option value="{{ $materias->nombre_materia }}">{{ $materias->nombre_materia }}</option>
@@ -125,11 +185,11 @@
                     <div class="panel-body">
                         <div class="form-row">
                             <div class="form-group">                                
-                                <label class="control-label" for="Motivos">Exposición de motivos:</label>
+                                <label class="control-label" for="Motivos"><Span class = "red"> * </span>Exposición de motivos:</label>
                                 <input id="Motivos" name="Motivos" type="file" accept="application/pdf">
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="HistorialA">Historial académico:</label>
+                                <label class="control-label" for="HistorialA"><Span class = "red"> * </span>Historial académico:</label>
                                 <input id="HistorialA" name="HistorialA" type="file" accept="application/pdf">
                             </div>
                         </div>
@@ -165,5 +225,24 @@
         ultimoValorValido = $("#Materias").val();
     }
     });
+</script>
+
+<script type="text/javascript">
+    function mostrar(id) {
+        if (id == "CURP") {
+            $("#CURP").show();
+            $("#Pasaporte").hide();
+        }
+    
+        if (id == "Pasaporte") {
+            $("#CURP").hide();
+            $("#Pasaporte").show();
+        }
+
+        if (id == "Otro") {
+            $("#CURP").hide();
+            $("#Pasaporte").hide();
+        }
+    }
 </script>
 @endsection

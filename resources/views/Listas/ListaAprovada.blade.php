@@ -5,6 +5,23 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
     <section class="content" >
         <div class="row">
+            <div class="row">
+                <div class="col-xs-5">
+                    &nbsp;
+                </div>
+                <div class="col-xs-7">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#tab-01">Solicitudes Pendientes</a></li>
+                        <li><a data-toggle="tab" href="#tab-02">Solicitudes Aprobadas</a></li>
+                        <li><a data-toggle="tab" href="#tab-03">Solicitudes Rechazadas</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab-01">{{$pendientes}}</div>
+                        <div class="tab-pane" id="tab-02">{{$aceptado}}</div>
+                        <div class="tab-pane" id="tab-03">{{$rechazado}}</div>
+                    </div>
+                </div>
+            </div>
             <div class="col-xs-12">
                 <h2>Solicitudes de Movilidad</h2>
                 <hr class="red">

@@ -20,7 +20,7 @@
 
                 </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ route('FormComent') }}">Formulario</a></li>
+               <!-- <li><a href="{ route('FormComent') }}">Formulario</a></li> -->
                     <!-- Authentication Links -->
                     @guest
                     @if (Route::has('login'))

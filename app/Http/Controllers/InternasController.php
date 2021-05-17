@@ -41,7 +41,16 @@ class InternasController extends Controller
         $interna->nombre = $request->input('Nombre');
         $interna->apellidoP = $request->input('ApellidoP');
         $interna->apellidoM = $request->input('ApellidoM');
-        $interna->direccion = $request->input('dir');
+       // $interna->direccion = $request->input('dir');
+       
+       $solicitud->Calle = $request->input('Calle');
+       $solicitud->numeroE = $request->input('numeroE');
+       $solicitud->numeroI = $request->input('numeroI');
+       $solicitud->codigoP = $request->input('codigoP');
+       $solicitud->colonia = $request->input('colonia');
+       $solicitud->ciudad = $request->input('ciudad');
+       $solicitud->estadoDir = $request->input('estadoDir');
+
         $interna->telefono = $request->input('tel');
         $interna->correoE = $request->input('correoE');
         $interna->curp = $request->input('curp');

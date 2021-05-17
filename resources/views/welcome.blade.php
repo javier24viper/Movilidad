@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Movilidad</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
@@ -64,6 +64,11 @@
                 margin-bottom: 30px;
             }
         </style>
+        <style>
+            div.footer {
+                text-align: center;
+                }
+        </style>
         <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
     </head>
     <body>
@@ -73,7 +78,15 @@
             </div>
         </div>
         @include('sweetalert::alert')
-        
+            <div class="footer">
+                <hr>
+                    Instituto de Investigaciones Dr. José María Luis Mora <br>
+                    <span class="glyphicon glyphicon-globe" aria-hidden="true">&nbsp;&nbsp;</span><a href="http://www.mora.edu.mx/" target="new"> www.mora.edu.mx </a> <br>
+                    <span class="icon-home" aria-hidden="true">&nbsp;&nbsp;</span>Plaza Valentín Gómez Farías #12, Col. San Juan Mixcoac, México CDMX., C.P 03730 <br>
+                    <span class="glyphicon glyphicon-earphone" aria-hidden="true">&nbsp;&nbsp;</span>Tel. 55 98 37 77 Educación Continua ext. 1309 <br>
+                    <span class="glyphicon glyphicon-envelope" aria-hidden="true">&nbsp;&nbsp;</span>educacioncontinua@mora.edu.mx  <br>       
+                <hr>
+            </div>
         <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

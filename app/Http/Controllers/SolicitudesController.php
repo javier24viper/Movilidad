@@ -39,8 +39,8 @@ class SolicitudesController extends Controller
     //funcion para guardar solicitudes
     public function create(Request $request){
         
-       // $formdata = request()->all();
-        //dd($formdata);
+        $formdata = request()->all();
+      //  dd($formdata);
 
         $request->validate([
             'Nombre' => 'required',
@@ -49,7 +49,7 @@ class SolicitudesController extends Controller
             'Direccion' => 'required',
             'TelefonoC' => 'required',
             'CorreoE' => 'required',
-            'CURP' => 'required',
+            'CURP' => 'required | unique',
             'FechaI' => 'required',
             'FechaT' => 'required',
             'InstitucionD' => 'required',
@@ -102,10 +102,22 @@ class SolicitudesController extends Controller
          $solicitud->Nombre = $request->input('Nombre');
          $solicitud->ApellidoP = $request->input('ApellidoP');
          $solicitud->ApellidoM = $request->input('ApellidoM');
-         $solicitud->Direccion = $request->input('Direccion');
+         //$solicitud->Direccion = $request->input('Direccion');
+
+         $solicitud->Calle = $request->input('Calle');
+         $solicitud->numeroE = $request->input('numeroE');
+         $solicitud->numeroI = $request->input('numeroI');
+         $solicitud->codigoP = $request->input('codigoP');
+         $solicitud->colonia = $request->input('colonia');
+         $solicitud->ciudad = $request->input('ciudad');
+         $solicitud->estadoDir = $request->input('estadoDir');
+
          $solicitud->TelefonoC = $request->input('TelefonoC'); 
          $solicitud->CorreoE = $request->input('CorreoE'); 
+
          $solicitud->CURP = $request->input('CURP');
+         $solicitud->Pasaporte = $request->input('Pasaporte');
+
          $solicitud->FechaI = $request->input('FechaI');
          $solicitud->FechaT = $request->input('FechaT');
          $solicitud->InstitucionD = $request->input('InstitucionD');
@@ -137,8 +149,11 @@ class SolicitudesController extends Controller
      
     public function showAprobado(){
         //$movilidad = cambio_datos::all();
+        $pendientes = DB::table('cambio_datos')->where('Estado', '=', 1)->count();
+        $aceptado = DB::table('cambio_datos')->where('Estado', '=', 2)->count();
+        $rechazado = DB::table('cambio_datos')->where('Estado', '=', 3)->count();
         $movilidad = DB::table('cambio_datos')->where('Estado', '!=', 0)->get();
-        return view('Listas.ListaAprovada', compact('movilidad'));
+        return view('Listas.ListaAprovada', compact('movilidad','pendientes','aceptado','rechazado'));
     }
      
     public function UpdateEstado($id, $request){
