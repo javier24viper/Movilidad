@@ -43,13 +43,14 @@ class InternasController extends Controller
         $interna->apellidoM = $request->input('ApellidoM');
        // $interna->direccion = $request->input('dir');
        
-       $solicitud->Calle = $request->input('Calle');
-       $solicitud->numeroE = $request->input('numeroE');
-       $solicitud->numeroI = $request->input('numeroI');
-       $solicitud->codigoP = $request->input('codigoP');
-       $solicitud->colonia = $request->input('colonia');
-       $solicitud->ciudad = $request->input('ciudad');
-       $solicitud->estadoDir = $request->input('estadoDir');
+       $interna->Calle = $request->input('Calle');
+       $interna->numeroE = $request->input('numeroE');
+       $interna->numeroI = $request->input('numeroI');
+       $interna->codigoP = $request->input('codigoP');
+       $interna->colonia = $request->input('colonia');
+       $interna->ciudad = $request->input('ciudad');
+       $interna->estadoDir = $request->input('estadoDir');
+       $interna->pais = $request->input('pais');
 
         $interna->telefono = $request->input('tel');
         $interna->correoE = $request->input('correoE');
@@ -60,6 +61,7 @@ class InternasController extends Controller
         $interna->semestre = $request->input('sem');
         $interna->promedio = $request->input('prom');
         $interna->tesis = $request->input('tesis');
+        $interna->Estado = '0';
         $interna->materias = $MateriasN;
         $interna->cartaM = $file;
         $interna->historialA = $file2;

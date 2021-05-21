@@ -112,7 +112,7 @@
 	<tr>
 		</tr>
 	<tr>
-		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=12 rowspan=2 height="40" align="center" valign=bottom><font color="#000000"><b>Dirección:</b><br>{{ $PDFData->Direccion }}</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=12 rowspan=2 height="40" align="center" valign=bottom><font color="#000000"><b>Dirección:</b><br>{{$PDFData->Calle}} {{$PDFData->numeroE}},  {{$PDFData->numeroI}} <br> {{$PDFData->ciudad}}, {{$PDFData->estadoDir}} {{$PDFData->codigoP}}</font></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=4 rowspan=2 align="center" valign=bottom><font color="#000000"><b>Teléfono:</b><br>{{ $PDFData->TelefonoC }}</font></td>
 		</tr>
 	<tr>

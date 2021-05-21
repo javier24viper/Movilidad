@@ -10,8 +10,14 @@ class movinternas extends Model
     protected $fillable = [
         'nombre',
         'apellidop',
-        'apellidom',
-        'direccion',
+        'apellidom',        
+        'Calle',
+        'numeroE',
+        'numeroI',
+        'codigoP',
+        'colonia',
+        'ciudad',
+        'estadoDir',
         'telefono',
         'correoE',
         'curp',
@@ -25,5 +31,6 @@ class movinternas extends Model
         'materias',
         'cartaM',
         'historialA'
+        '-Estado'
       ];
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\cambio_datos;
+use App\movinternas;
 use App\materias;
 use App\User;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -41,12 +42,11 @@ class SolicitudesController extends Controller
         
         $formdata = request()->all();
       //  dd($formdata);
-
+        /*
         $request->validate([
             'Nombre' => 'required',
             'ApellidoP' => 'required',
             'ApellidoM' => 'required',
-            'Direccion' => 'required',
             'TelefonoC' => 'required',
             'CorreoE' => 'required',
             'CURP' => 'required | unique',
@@ -65,7 +65,7 @@ class SolicitudesController extends Controller
             'DocumentoM' => 'required',
             'CertificadoI' => 'required',
         ]);
-
+            */
         $materia = materias::all();
 
         $array_materia = $request->input('Materias');
@@ -111,6 +111,7 @@ class SolicitudesController extends Controller
          $solicitud->colonia = $request->input('colonia');
          $solicitud->ciudad = $request->input('ciudad');
          $solicitud->estadoDir = $request->input('estadoDir');
+         $solicitud->pais = $request->input('pais');
 
          $solicitud->TelefonoC = $request->input('TelefonoC'); 
          $solicitud->CorreoE = $request->input('CorreoE'); 
@@ -142,8 +143,10 @@ class SolicitudesController extends Controller
     }
     public function show(){
         //$movilidad = cambio_datos::all();
-        $movilidad = DB::table('cambio_datos')->where('Estado', '=', 0)->get();
-        return view('Listas.ListadoRevision', compact('movilidad'));
+        $movilidad = DB::table('cambio_datos')->where('Estado', '=', 0)->get();    
+        $internas = DB::table('movinternas')->where('Estado', '=', 0)->get();
+
+        return view('Listas.ListadoRevision', compact('movilidad', 'internas'));
     }
 
      

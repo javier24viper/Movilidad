@@ -78,6 +78,10 @@
                                     <label class="col-sm-12 control-label" for="estadoDir">Estado:</label>
                                     <input class="form-control" id="estadoDir" name="estadoDir" type="text">
                                 </div>
+                                <div class="form-group col-xs-4">
+                                    <label class="col-sm-12 control-label" for="pais">país:</label>
+                                    <input class="form-control" id="pais" name="pais" type="text">
+                                </div>
                             </div>
                             <!--<div class="form-group">
                                 <div class="form-group col-xs-4">                                    
