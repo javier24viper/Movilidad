@@ -28,6 +28,16 @@ class DirectoryFake
     }
 
     /**
+     * Reset the container.
+     *
+     * @return void
+     */
+    public static function tearDown()
+    {
+        Container::reset();
+    }
+    
+    /**
      * Make a connection fake.
      *
      * @param array $config

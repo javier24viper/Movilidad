@@ -21,9 +21,9 @@ class LdapServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->registerLogging();
         $this->registerConfiguration();
         $this->registerCommands();
-        $this->registerLogging();
         $this->registerLdapConnections();
     }
 

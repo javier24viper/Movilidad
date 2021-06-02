@@ -302,7 +302,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
      */
     public function newQueryBuilder(Connection $connection)
     {
-        return (new Builder($connection))->setCache($connection->getCache());
+        return new Builder($connection);
     }
 
     /**
@@ -911,6 +911,8 @@ abstract class Model implements ArrayAccess, JsonSerializable
 
         if ($saved) {
             $this->fireModelEvent(new Events\Saved($this));
+
+            $this->in = null;
         }
 
         return $saved;
@@ -1135,9 +1137,13 @@ abstract class Model implements ArrayAccess, JsonSerializable
      */
     protected function deleteLeafNodes()
     {
-        return $this->newQuery()->listing()->in($this->dn)->get()->each(function (self $model) {
-            $model->delete(true);
-        });
+        return $this->newQueryWithoutScopes()
+            ->in($this->dn)
+            ->listing()
+            ->paginate()
+            ->each(function (self $model) {
+                $model->delete($recursive = true);
+            });
     }
 
     /**

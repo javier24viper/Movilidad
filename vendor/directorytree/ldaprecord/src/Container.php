@@ -8,68 +8,29 @@ use LdapRecord\Events\DispatchesEvents;
 
 class Container
 {
-    use DispatchesEvents;
     use HasLogger;
+    use DispatchesEvents;
 
     /**
-     * Current instance of the container.
+     * The container instance.
      *
      * @var Container
      */
     protected static $instance;
 
     /**
-     * Connections in the container.
+     * The LDAP connections.
      *
      * @var Connection[]
      */
     protected $connections = [];
 
     /**
-     * The name of the default connection.
+     * The name of the default LDAP connection.
      *
      * @var string
      */
     protected $default = 'default';
-
-    /**
-     * The events to register listeners for during initialization.
-     *
-     * @var array
-     */
-    protected $listen = [
-        'LdapRecord\Auth\Events\*',
-        'LdapRecord\Query\Events\*',
-        'LdapRecord\Models\Events\*',
-    ];
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->initEventLogger();
-    }
-
-    /**
-     * Initializes the event logger.
-     *
-     * @return void
-     */
-    public function initEventLogger()
-    {
-        $dispatcher = static::getEventDispatcher();
-
-        $logger = $this->newEventLogger();
-
-        foreach ($this->listen as $event) {
-            $dispatcher->listen($event, function ($eventName, $events) use ($logger) {
-                foreach ($events as $event) {
-                    $logger->log($event);
-                }
-            });
-        }
-    }
 
     /**
      * Get or set the current instance of the container.
@@ -82,13 +43,25 @@ class Container
     }
 
     /**
+     * Set the container instance.
+     *
+     * @param Container|null $container
+     *
+     * @return Container|null
+     */
+    public static function setInstance(Container $container = null)
+    {
+        return static::$instance = $container;
+    }
+
+    /**
      * Set and get a new instance of the container.
      *
      * @return Container
      */
     public static function getNewInstance()
     {
-        return static::$instance = new static();
+        return static::setInstance(new static);
     }
 
     /**
@@ -150,6 +123,26 @@ class Container
     public static function getDefaultConnection()
     {
         return static::getInstance()->getDefault();
+    }
+
+    /**
+     * Reset the container.
+     *
+     * @return void
+     */
+    public static function reset()
+    {
+        static::getInstance()->flush();
+    }
+
+    /**
+     * Returns a new event logger instance.
+     *
+     * @return EventLogger
+     */
+    protected function newEventLogger()
+    {
+        return new EventLogger($this->logger);
     }
 
     /**
@@ -258,12 +251,14 @@ class Container
     }
 
     /**
-     * Returns a new event logger instance.
+     * Flush the container of all instances and connections.
      *
-     * @return EventLogger
+     * @return void
      */
-    protected function newEventLogger()
+    public function flush()
     {
-        return new EventLogger($this->getLogger());
+        $this->connections = [];
+        $this->dispatcher = null;
+        $this->logger = null;
     }
 }

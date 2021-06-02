@@ -7,9 +7,9 @@ trait DispatchesEvents
     /**
      * The event dispatcher instance.
      *
-     * @var DispatcherInterface
+     * @var DispatcherInterface|null
      */
-    protected static $dispatcher;
+    protected $dispatcher;
 
     /**
      * Get the event dispatcher instance.
@@ -18,13 +18,13 @@ trait DispatchesEvents
      */
     public static function getEventDispatcher()
     {
-        // If no event dispatcher has been set, well instantiate and
-        // set one here. This will be our singleton instance.
-        if (! isset(static::$dispatcher)) {
-            static::setEventDispatcher(new Dispatcher());
+        $instance = static::getInstance();
+
+        if (! ($dispatcher = $instance->dispatcher())) {
+            $instance->setEventDispatcher($dispatcher = new Dispatcher());
         }
 
-        return static::$dispatcher;
+        return $dispatcher;
     }
 
     /**
@@ -36,7 +36,29 @@ trait DispatchesEvents
      */
     public static function setEventDispatcher(DispatcherInterface $dispatcher)
     {
-        static::$dispatcher = $dispatcher;
+        static::getInstance()->setDispatcher($dispatcher);
+    }
+
+    /**
+     * Get the event dispatcher instance.
+     *
+     * @return DispatcherInterface|null
+     */
+    public function dispatcher()
+    {
+        return $this->dispatcher;
+    }
+
+    /**
+     * Set the event dispatcher.
+     *
+     * @param DispatcherInterface $dispatcher
+     *
+     * @return void
+     */
+    public function setDispatcher(DispatcherInterface $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -44,8 +66,8 @@ trait DispatchesEvents
      *
      * @return void
      */
-    public static function unsetEventDispatcher()
+    public function unsetEventDispatcher()
     {
-        static::$dispatcher = null;
+        $this->dispatcher = null;
     }
 }

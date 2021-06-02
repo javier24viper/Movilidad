@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -87,17 +88,18 @@
                     <span class="glyphicon glyphicon-envelope" aria-hidden="true">&nbsp;&nbsp;</span>educacioncontinua@mora.edu.mx  <br>       
                 <hr>
             </div>
-        <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
+
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+       <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
         <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
+        <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
         
         
     <script>
-        $('#example1').DataTable( {
+        $('#myTable1').DataTable( {
           "deferRender": true,
           "retrieve": true,
           "processing": true,
@@ -135,7 +137,7 @@
         } );
     </script>
     <script>
-        $('#table-2').DataTable( {
+        $('#myTable2').DataTable( {
           "deferRender": true,
           "retrieve": true,
           "processing": true,
@@ -176,7 +178,7 @@
 
     <script> 
         $(document).ready( function () {
-            $('#example1').dataTable( {
+            $('#myTable1').dataTable( {
                 "autoWidth": false
                 "paging": true,
                 "lengthChange": false,
@@ -188,7 +190,7 @@
     </script>
     <script> 
     $(document).ready( function () {
-        $('#table-2').dataTable( {
+        $('#myTable2').dataTable( {
             "autoWidth": false
             "paging": true,
             "lengthChange": false,
@@ -197,6 +199,9 @@
             "info": true,
         } );
         } );
+    </script>
+    
+    <script src="{{ asset('js/tablas.js') }}" defer>
     </script>
     </body>
 </html>

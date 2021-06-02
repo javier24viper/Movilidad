@@ -214,7 +214,7 @@ class Builder
     /**
      * Executes the LDAP query.
      *
-     * @param array $columns
+     * @param string|array $columns
      *
      * @return Collection|array
      */
@@ -376,6 +376,7 @@ class Builder
     public function model(Model $model)
     {
         return $model->newQueryBuilder($this->connection)
+            ->setCache($this->connection->getCache())
             ->setModel($model)
             ->in($this->dn);
     }
@@ -400,10 +401,8 @@ class Builder
 
         $results = $this->getCachedResponse($query, $callback);
 
-        // Log the query.
         $this->logQuery($this, $this->type, $this->getElapsedTime($start));
 
-        // Process & return the results.
         return $this->process($results);
     }
 
@@ -432,10 +431,8 @@ class Builder
 
         $pages = $this->getCachedResponse($query, $callback);
 
-        // Log the query.
         $this->logQuery($this, 'paginate', $this->getElapsedTime($start));
 
-        // Process & return the results.
         return $this->process($pages);
     }
 
@@ -520,7 +517,7 @@ class Builder
             }
 
             return $ldap->{$this->type}(
-                $this->getDn(),
+                $this->dn,
                 $filter,
                 $this->getSelects(),
                 $onlyAttributes = false,
@@ -1484,17 +1481,20 @@ class Builder
      */
     public function getSelects()
     {
-        $selects = $this->columns ?? [];
+        $selects = $this->columns ?? ['*'];
+
+        if (in_array('*', $selects)) {
+            return $selects;
+        }
+
+        if (in_array('objectclass', $selects)) {
+            return $selects;
+        }
 
         // If the * character is not provided in the selected columns,
         // we need to ensure we always select the object class, as
         // this is used for constructing models properly.
-        if (
-            !in_array('*', $selects) &&
-            !in_array('objectclass', $selects)
-        ) {
-            $selects[] = 'objectclass';
-        }
+        $selects[] = 'objectclass';
 
         return $selects;
     }
@@ -1868,7 +1868,7 @@ class Builder
      */
     protected function fireQueryEvent(QueryExecuted $event)
     {
-        Container::getEventDispatcher()->fire($event);
+        Container::getInstance()->getEventDispatcher()->fire($event);
     }
 
     /**

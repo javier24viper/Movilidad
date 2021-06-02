@@ -14,6 +14,7 @@ class Group extends Entry
         'groupofnames',
         'nestedgroup',
         'ipausergroup',
+        'ipaobject',
         'posixgroup',
     ];
 

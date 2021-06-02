@@ -38,7 +38,7 @@ trait ListensForLdapBindFailure
      */
     public function listenForLdapBindFailure()
     {
-        Container::getEventDispatcher()->listen(Failed::class, function (Failed $event) {
+        Container::getInstance()->getEventDispatcher()->listen(Failed::class, function (Failed $event) {
             $error = $event->getConnection()->getDetailedError();
 
             $this->ldapBindFailed($error->getErrorMessage(), $error->getDiagnosticMessage());
@@ -100,12 +100,22 @@ trait ListensForLdapBindFailure
      */
     protected function throwLoginValidationException($message)
     {
+        $username = 'email';
+
         if (class_exists($fortify = 'Laravel\Fortify\Fortify')) {
             $username = $fortify::username();
         }
 
+        else if (method_exists($this, 'username')) {
+            $username = $this->username();
+        }
+
+        else if (property_exists($this, 'username')) {
+            $username = $this->username;
+        }
+
         throw ValidationException::withMessages([
-            $username ?? $this->username() => $message,
+            $username => $message,
         ]);
     }
 
