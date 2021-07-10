@@ -34,7 +34,7 @@
                         <th>Dirección</th>
                         <th>Teléfono</th>
                         <th>Correo electrónico</th>
-                        <th>CURP o número de pasaporte</th>
+                        <th>CURP o Número de pasaporte</th>
                         <th>Periodo para realizar la movilidad</th>
                         <th>Institución de Procedencia</th>
                         <th>Promedio</th>
@@ -54,7 +54,7 @@
                             @if ($movilidad->Estado === 1)
                                 <a href="/UpdateEstado/{{$movilidad->id}}/0" class="btn btn-default btn-sm">Aprobado</a>
                             @elseif ($movilidad->Estado === 0)
-                                <a href="/UpdateEstado/{{$movilidad->id}}/1" class="btn btn-danger btn-sm">Sin Aprovar</a>
+                                <a href="/UpdateEstado/{{$movilidad->id}}/1" class="btn btn-danger btn-sm">Sin Aprobar</a>
                             @endif
                         </td>
                         <td>{{ $movilidad->Nombre }} {{ $movilidad->ApellidoP }} {{ $movilidad->ApellidoM }}</td>
@@ -130,7 +130,7 @@
                         <th>Dirección</th>
                         <th>Teléfono</th>
                         <th>Correo electrónico</th>
-                        <th>CURP o número de pasaporte</th>
+                        <th>CURP o Número de pasaporte</th>
                         <th>Programa de origen</th>
                         <th>Programa de destino</th>
                         <th>Periodo para realizar la movilidad</th>
@@ -149,7 +149,7 @@
                             @if ($internas->Estado === 1)
                                 <a href="/UpdateEstado/{{$internas->id}}/0" class="btn btn-default btn-sm">Aprobado</a>
                             @elseif ($internas->Estado === 0)
-                                <a href="/UpdateEstado/{{$internas->id}}/1" class="btn btn-danger btn-sm">Sin Aprovar</a>
+                                <a href="/UpdateEstado/{{$internas->id}}/1" class="btn btn-danger btn-sm">Sin Aprobar</a>
                             @endif
                         </td>
                         <td>{{ $internas->nombre }} {{ $internas->apellidop }} {{ $internas->apellidom }}</td>

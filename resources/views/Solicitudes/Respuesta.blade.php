@@ -21,12 +21,14 @@
             <h2>Su solicitud fue Rechazada!!!</h2>
             <br>
             <br>
+            @else
+            <h2>Sin Solicitud </h2>
             @endif
         </div>
         <div>
             <h4>Mensaje</h4>
             <hr class="red">
-            <p>{{ $mensaje->Coment}}</p>
+           <!-- <p>{mensaje->Coment}}</p> -->
             <br>
             <br>
         </div>

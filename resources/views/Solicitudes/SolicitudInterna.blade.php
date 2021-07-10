@@ -38,7 +38,7 @@
                             <div class="form-group">
                                 <div class="form-group col-xs-4">
                                     <label class="col-sm-12 control-label" for="tel">Teléfono:</label>
-                                    <input class="form-control" value="" id="tel" name="tel" placeholder="Telefono" type="text">
+                                    <input class="form-control" value="" id="tel" name="tel" placeholder="Teléfono" type="text">
                                 </div>
                                 <div class="form-group col-xs-4">
                                     <label class="col-sm-12 control-label" for="correoE">Correo Electrónico:</label>
@@ -52,35 +52,35 @@
                             -->
                                 <div class="form-group col-xs-4">
                                     <label class="col-sm-12 control-label" for="Calle">Calle:</label>
-                                    <input class="form-control" id="Calle" name="Calle" type="text">
+                                    <input class="form-control" id="Calle" name="Calle" placeholder="Calle" type="text">
                                 </div>
                                 <div class="form-group col-xs-4">
-                                    <label class="col-sm-12 control-label" for="numeroE">Numero Exterior:</label>
-                                    <input class="form-control" id="numeroE" name="numeroE" type="text">
+                                    <label class="col-sm-12 control-label" for="numeroE">Número Exterior:</label>
+                                    <input class="form-control" id="numeroE" name="numeroE" placeholder="Número Ext." type="text">
                                 </div>
                                 <div class="form-group col-xs-4">
-                                    <label class="col-sm-12 control-label" for="numeroI">Numero Interior:</label>
-                                    <input class="form-control" id="numeroI" name="numeroI" type="text">
+                                    <label class="col-sm-12 control-label" for="numeroI">Número Interior:</label>
+                                    <input class="form-control" id="numeroI" name="numeroI" placeholder="Número Int." type="text">
                                 </div>
                                 <div class="form-group col-xs-4">
                                     <label class="col-sm-12 control-label" for="codigoP">Codigo Postal:</label>
-                                    <input class="form-control" id="codigoP" name="codigoP" type="text">
+                                    <input class="form-control" id="codigoP" name="codigoP" placeholder="CP" type="text">
                                 </div>
                                 <div class="form-group col-xs-4">
                                     <label class="col-sm-12 control-label" for="colonia">Colonia:</label>
-                                    <input class="form-control" id="colonia" name="colonia" type="text">
+                                    <input class="form-control" id="colonia" name="colonia" placeholder="Colonia" type="text">
                                 </div>
                                 <div class="form-group col-xs-4">
                                     <label class="col-sm-12 control-label" for="ciudad">Ciudad:</label>
-                                    <input class="form-control" id="ciudad" name="ciudad" type="text">
+                                    <input class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" type="text">
                                 </div>
                                 <div class="form-group col-xs-4">
                                     <label class="col-sm-12 control-label" for="estadoDir">Estado:</label>
-                                    <input class="form-control" id="estadoDir" name="estadoDir" type="text">
+                                    <input class="form-control" id="estadoDir" name="estadoDir" placeholder="Estado" type="text">
                                 </div>
                                 <div class="form-group col-xs-4">
-                                    <label class="col-sm-12 control-label" for="pais">país:</label>
-                                    <input class="form-control" id="pais" name="pais" type="text">
+                                    <label class="col-sm-12 control-label" for="pais">País:</label>
+                                    <input class="form-control" id="pais" name="pais" placeholder="País" type="text">
                                 </div>
                             </div>
                             <!--<div class="form-group">

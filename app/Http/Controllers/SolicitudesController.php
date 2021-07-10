@@ -194,6 +194,7 @@ class SolicitudesController extends Controller
         $EstodSolicitud = $aprobado[0]->Estado;
         //$resultado = cambio_datos::all();
        // dd($aprobado);
+       
         if (Auth::user()->id == $user_id && $EstodSolicitud == 0) {
             
             $resultado = 0;

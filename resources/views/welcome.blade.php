@@ -84,8 +84,8 @@
                     Instituto de Investigaciones Dr. José María Luis Mora <br>
                     <span class="glyphicon glyphicon-globe" aria-hidden="true">&nbsp;&nbsp;</span><a href="http://www.mora.edu.mx/" target="new"> www.mora.edu.mx </a> <br>
                     <span class="icon-home" aria-hidden="true">&nbsp;&nbsp;</span>Plaza Valentín Gómez Farías #12, Col. San Juan Mixcoac, México CDMX., C.P 03730 <br>
-                    <span class="glyphicon glyphicon-earphone" aria-hidden="true">&nbsp;&nbsp;</span>Tel. 55 98 37 77 Educación Continua ext. 1309 <br>
-                    <span class="glyphicon glyphicon-envelope" aria-hidden="true">&nbsp;&nbsp;</span>educacioncontinua@mora.edu.mx  <br>       
+                    <span class="glyphicon glyphicon-earphone" aria-hidden="true">&nbsp;&nbsp;</span>Tel. 55 98 37 77 Servicios escolares Ext. 1101, 1111, 1125 y 1127 <br>
+                    <span class="glyphicon glyphicon-envelope" aria-hidden="true">&nbsp;&nbsp;</span>sescolares@institutomora.edu.mx  <br>       
                 <hr>
             </div>
 
