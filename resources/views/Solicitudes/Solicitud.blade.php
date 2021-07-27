@@ -2,6 +2,27 @@
 @section('content')
 @include('layouts.navSolicitud')
 
+    <style>
+        .btn-flotante {
+            font-size: 16px; /* Cambiar el tamaño de la tipografia */
+            text-transform: uppercase; /* Texto en mayusculas */
+            font-weight: bold; /* Fuente en negrita o bold */
+            color: #ffffff; /* Color del texto */
+            border-radius: 5px; /* Borde del boton */
+            letter-spacing: 2px; /* Espacio entre letras */
+            background-color: #9D2449; /* Color de fondo */
+            padding: 18px 30px; /* Relleno del boton */
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            transition: all 300ms ease 0ms;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            z-index: 99;
+        }
+    </style>
+
+<h2 class="btn-flotante">Solicitud Externa</h2>
+
 <section class="content">
         <h2>Campos obligatorios <Span class = "red"> * </span> </h2>
         <hr class="red">
@@ -40,7 +61,7 @@
                                     <br>
                                     <br>
                                 @enderror                
-                                <label class="col-sm-12 control-label" for="ApellidoM"> <Span class = "red"> * </span> Apellido Materno:</label>
+                                <label class="col-sm-12 control-label" for="ApellidoM"> Apellido Materno:</label>
                                 <input class="form-control" value="{{old('ApellidoM')}}" id="ApellidoM" name="ApellidoM" placeholder="Apellido Materno" type="text">
                             </div>
                             <div class="form-group col-xs-4">   
@@ -78,19 +99,6 @@
                                 <label class="col-sm-12 control-label" for="CorreoE"> <Span class = "red"> * </span> Correo Electronico:</label>
                                 <input class="form-control" value="{{old('CorreoE')}}" id="CorreoE" name="CorreoE" placeholder="Correo Electronico" type="text">
                             </div>
-                            <!--
-                            <div class="form-group col-xs-4">
-                                error('Direccion')
-                                    <button type="button" class="btn btn-primary btn-xs disabled">
-                                        {$message}} <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
-                                    </button>
-                                    <br>
-                                    <br>
-                                enderror
-                                <label class="col-sm-12 control-label" for="Direccion">Dirección:</label>
-                                <input class="form-control" value="{old('Direccion')}}" id="Direccion" name="Direccion" placeholder="Teléfono" type="text">
-                            </div>
-                        -->
                             <div class="form-group col-xs-4">
                                 <label class="col-sm-12 control-label" for="Calle">Calle:</label>
                                 <input class="form-control" id="Calle" name="Calle" placeholder="Calle" type="text">
@@ -123,6 +131,10 @@
                                 <label class="col-sm-12 control-label" for="pais">País:</label>
                                 <input class="form-control" id="pais" name="pais" placeholder="País" type="text">
                             </div>
+                            <div class="form-group col-xs-4">
+                                <label class="col-sm-12 control-label" for="matricula">Matricula</label>
+                                <input class="form-control" id="Matricula" name="Matricula" placeholder="Matricula" type="text">
+                            </div>
                         </div>
                         <div class="form-group">
                             <div class="form-group col-xs-4">
@@ -133,20 +145,11 @@
                                     <option value="Pasaporte">Pasaporte</option>
                                 </select>
                             </div>
-                           <!-- <div class="form-group col-md-5">
-                                error('CURP')
-                                    <button type="button" class="btn btn-primary btn-xs disabled">
-                                        {$message}} <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
-                                    </button>
-                                    <br>
-                                    <br>
-                                enderror
-                                <label class="col-sm-12 control-label" for="CURP">CURP o número de pasaporte :</label>
-                                <input class="form-control" value="{old('CURP')}}" id="CURP" name="CURP" placeholder="CURP o número de pasaporte " type="text">
-                            </div> -->
                         </div>
                         <div class="form-group" id="CURP" style="display: none;">
                             <input class="form-control" value="{{old('CURP')}}" id="CURP" name="CURP" placeholder="CURP" type="text">
+                            <br>
+                            <a href="https://www.gob.mx/curp/" class="btn btn-success btn-lg" target="_blank">¿No conoces tu CURP...? Consúltala aquí</a>
                         </div>
                         <div class="form-group" id="Pasaporte" style="display: none;">
                             <input class="form-control" value="{{old('Pasaporte')}}" id="Pasaporte" name="Pasaporte" placeholder="Número de pasaporte " type="text">
@@ -162,12 +165,13 @@
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-parent="#accordion2" data-toggle="collapse" href="#panel-02" aria-expanded="true" aria-controls="panel-02">
-                            Información de la estancia de procedencia
+                            Datos de Movilidad
                         </a>
                     </h4>
                 </div>
                 <div class="panel-collapse collapse in" id="panel-02">
                     <div class="panel-body">
+                    <!--
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <div class="form-group col-xs-5">
@@ -206,6 +210,17 @@
                                 </div>
                             </div>
                         </div>
+                    -->
+                    <div class="form-row">
+                        <div class="form-group col-xs-6">    
+                            <label for=""> </span> Periodo electivo</label>
+                                <select id="Periodo" name="Periodo" class="form-control">
+                                <option value="0">Seleccione un periodo</option>
+                                    <option value="1">01 Enero a Junio</option>
+                                    <option value="2">02 Agosto a Diciembre</option>
+                                </select>
+                        </div>
+                    </div>
                         <div class="form-row">
                             <div class="form-group col-xs-6">
                                 @error('InstitucionD')
@@ -229,6 +244,10 @@
                                 <label class="col-sm-4 control-label" for="Promedio"> <Span class = "red"> * </span> Promedio:</label>
                                 <input class="form-control" value="{{old('Promedio')}}" id="Promedio" name="Promedio" placeholder="Promedio mayor a 8.5" type="number" step="0.1" min="8.5" max="10">
                             </div>
+                            <div class="form-group col-md-5">
+                                <label class="col-sm-4 control-label" for="paisM">País</label>
+                                <input class="form-control" id="PaisM" name="PaisM" placeholder="País" type="text">
+                            </div>
                         </div>
                         <div class="form-group">
                             <div class="form-group col-xs-6">
@@ -243,6 +262,7 @@
                                 <input class="form-control" value="{{old('Tesis')}}" id="Tesis" name="Tesis" placeholder="Nombre de tesis" type="text">
                             </div>
                             <div class="form-group col-xs-6">
+
                                 @error('Materias')
                                     <button type="button" class="btn btn-primary btn-xs disabled">
                                         {{$message}} <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
@@ -256,6 +276,7 @@
                                         <option value="{{ $materias->nombre_materia }}">{{ $materias->nombre_materia }}</option>
                                     @endforeach
                                 </select>
+                                
                             </div>
                         </div>
                     </div>
@@ -277,6 +298,15 @@
                 <div class="panel-body">
                     <div class="form-row">
                         <div class="form-group">
+                            <div class="form-group col-xs-6">
+                                <label class="col-sm-7 control-label" for="file-00"><Span class = "red"> * </span> Foto:</label>
+                                <div class=col-sm-5>
+                                    <input id="Foto" name="Foto" type="file" accept="image/jpeg">
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
                             <div class="form-group col-xs-6">
                                 <label class="col-sm-7 control-label" for="file-01"> <Span class = "red"> * </span> Oficio de postulación de la Universidad de origen:</label>
                                 <div class="col-sm-5">

@@ -1,8 +1,29 @@
 @extends('formcontent')
 @section('content')
 @include('layouts.navSolicitud')
-<br>
-<br>
+
+
+<style>
+    .btn-flotante {
+        font-size: 16px; /* Cambiar el tamaño de la tipografia */
+        text-transform: uppercase; /* Texto en mayusculas */
+        font-weight: bold; /* Fuente en negrita o bold */
+        color: #ffffff; /* Color del texto */
+        border-radius: 5px; /* Borde del boton */
+        letter-spacing: 2px; /* Espacio entre letras */
+        background-color: #9D2449; /* Color de fondo */
+        padding: 18px 30px; /* Relleno del boton */
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        transition: all 300ms ease 0ms;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        z-index: 99;
+    }
+</style>
+
+<h2 class="btn-flotante">Solicitud Interna</h2>
+
 <section>
     <h2>Campos obligatorios <Span class = "red"> * </span> </h2>
     <hr class="red">
@@ -44,12 +65,6 @@
                                     <label class="col-sm-12 control-label" for="correoE">Correo Electrónico:</label>
                                     <input class="form-control" value="" id="correoE" name="correoE" placeholder="Correo Electronico" type="text">
                                 </div>
-                                <!--
-                                <div class="form-group col-xs-4">                                    
-                                    <label class="col-sm-2 control-label" for="dir">Dirección:</label>
-                                    <input class="form-control" value="" id="dir" name="dir" placeholder="Direccion" type="text">
-                                </div>
-                            -->
                                 <div class="form-group col-xs-4">
                                     <label class="col-sm-12 control-label" for="Calle">Calle:</label>
                                     <input class="form-control" id="Calle" name="Calle" placeholder="Calle" type="text">
@@ -83,38 +98,11 @@
                                     <input class="form-control" id="pais" name="pais" placeholder="País" type="text">
                                 </div>
                             </div>
-                            <!--<div class="form-group">
-                                <div class="form-group col-xs-4">                                    
-                                    <label class="col-sm-12 control-label" for="curp">CURP o Numero de psaporte:</label>
-                                    <input class="form-control" value="" id="curp" name="curp" placeholder="CURP o Numero de psaporte" type="text">
-                                </div>
-                            </div>-->
                             <div class="form-group">
-                                <div class="form-group col-xs-4">    
-                                    <label for=""> <Span class = "red"> * </span> CURP o Número de pasaporte:</label>
-                                        <select class="form-control" id="status" name="status" onChange="mostrar(this.value);">
-                                            <option value="Otro">&nbsp;</option>
-                                            <option value="CURP">CURP</option>
-                                            <option value="Pasaporte">Pasaporte</option>
-                                        </select>
+                                <div class="form-group col-xs-4">                                    
+                                    <label class="col-sm-12 control-label" for="CURP">CURP</label>
+                                    <input class="form-control" value="" id="CURP" name="CURP" placeholder="CURP" type="text">
                                 </div>
-                            <!-- <div class="form-group col-md-5">
-                                    error('CURP')
-                                        <button type="button" class="btn btn-primary btn-xs disabled">
-                                            {$message}} <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
-                                        </button>
-                                        <br>
-                                        <br>
-                                    enderror
-                                    <label class="col-sm-12 control-label" for="CURP">CURP o número de pasaporte :</label>
-                                    <input class="form-control" value="{old('CURP')}}" id="CURP" name="CURP" placeholder="CURP o número de pasaporte " type="text">
-                                </div> -->
-                            </div>
-                            <div class="form-group" id="CURP" style="display: none;">
-                                <input class="form-control" value="{{old('CURP')}}" id="CURP" name="CURP" placeholder="CURP" type="text">
-                            </div>
-                            <div class="form-group" id="Pasaporte" style="display: none;">
-                                <input class="form-control" value="{{old('CURP')}}" id="CURP" name="CURP" placeholder="Número de pasaporte " type="text">
                             </div>
                         </div>
                     </div>
@@ -143,8 +131,12 @@
                                     <input class="form-control" value="" id="programaD" name="programaD" placeholder="Programa de destino" type="text">
                                 </div>
                                 <div class="form-group col-xs-4">
-                                    <label class="col-sm-12 control-label" for="periodo">Periodo para realizar la movilidad:</label>
-                                    <input class="form-control" value="" id="periodo" name="periodo" placeholder="Periodo" type="text">
+                                    <label for=""> </span> Periodo electivo</label>
+                                        <select id="periodo" name="periodo" class="form-control">
+                                            <option value="0">Seleccione un periodo</option>
+                                            <option value="1">01 Enero a Junio</option>
+                                            <option value="2">02 Agosto a Diciembre</option>
+                                        </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -231,22 +223,4 @@
     });
 </script>
 
-<script type="text/javascript">
-    function mostrar(id) {
-        if (id == "CURP") {
-            $("#CURP").show();
-            $("#Pasaporte").hide();
-        }
-    
-        if (id == "Pasaporte") {
-            $("#CURP").hide();
-            $("#Pasaporte").show();
-        }
-
-        if (id == "Otro") {
-            $("#CURP").hide();
-            $("#Pasaporte").hide();
-        }
-    }
-</script>
 @endsection

@@ -41,12 +41,11 @@ class SolicitudesController extends Controller
     public function create(Request $request){
         
         $formdata = request()->all();
-      //  dd($formdata);
+       // dd($formdata);
         /*
         $request->validate([
             'Nombre' => 'required',
             'ApellidoP' => 'required',
-            'ApellidoM' => 'required',
             'TelefonoC' => 'required',
             'CorreoE' => 'required',
             'CURP' => 'required | unique',
@@ -97,6 +96,9 @@ class SolicitudesController extends Controller
         //Certificado de Idioma
         $file7 = $request->file('CertificadoI')->getClientOriginalName();
         $path7 = $request->file('CertificadoI')->storeAs('public/externa/'.$id, $file7);
+        //foto
+        $file8 = $request->file('Foto')->getClientOriginalName();
+        $path8 = $request->file('Foto')->storeAs('public/externa/'.$id, $file8);
 
          $solicitud = new cambio_datos();
          $solicitud->Nombre = $request->input('Nombre');
@@ -115,14 +117,16 @@ class SolicitudesController extends Controller
 
          $solicitud->TelefonoC = $request->input('TelefonoC'); 
          $solicitud->CorreoE = $request->input('CorreoE'); 
-
+         $solicitud->Matricula = $request->input('Matricula');
          $solicitud->CURP = $request->input('CURP');
          $solicitud->Pasaporte = $request->input('Pasaporte');
 
-         $solicitud->FechaI = $request->input('FechaI');
-         $solicitud->FechaT = $request->input('FechaT');
+        // $solicitud->FechaI = $request->input('FechaI');
+         //$solicitud->FechaT = $request->input('FechaT');
+         $solicitud->Periodo = $request->input('Periodo');
          $solicitud->InstitucionD = $request->input('InstitucionD');
          $solicitud->Promedio = $request->input('Promedio');
+         $solicitud->PaisM = $request->input('PaisM');
          $solicitud->Tesis = $request->input('Tesis');
          $solicitud->users_id = $id;
          $solicitud->Materias = $MateriasN;
@@ -133,7 +137,8 @@ class SolicitudesController extends Controller
          $solicitud->SeguroM = $file4;
          $solicitud->IdentificacionO = $file5;
          $solicitud->DocumentoM = $file6;
-         $solicitud->CertificadoI = $file6;
+         $solicitud->CertificadoI = $file7;
+         $solicitud->Foto = $file8;
          $solicitud->Estado = '0';
          $solicitud->save();
 
@@ -143,9 +148,10 @@ class SolicitudesController extends Controller
     }
     public function show(){
         //$movilidad = cambio_datos::all();
-        $movilidad = DB::table('cambio_datos')->where('Estado', '=', 0)->get();    
+        $movilidad = DB::table('cambio_datos')->where('Estado', '=', 0)->get();  
+       
         $internas = DB::table('movinternas')->where('Estado', '=', 0)->get();
-
+       // dd($internas);  
         return view('Listas.ListadoRevision', compact('movilidad', 'internas'));
     }
 
@@ -156,6 +162,7 @@ class SolicitudesController extends Controller
         $aceptado = DB::table('cambio_datos')->where('Estado', '=', 2)->count();
         $rechazado = DB::table('cambio_datos')->where('Estado', '=', 3)->count();
         $movilidad = DB::table('cambio_datos')->where('Estado', '!=', 0)->get();
+        
         return view('Listas.ListaAprovada', compact('movilidad','pendientes','aceptado','rechazado'));
     }
      

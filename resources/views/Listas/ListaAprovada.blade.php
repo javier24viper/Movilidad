@@ -27,7 +27,7 @@
                 <hr class="red">
             </div>
             <div class="col-sm-12">                 
-                <table id="example1" name="example1" class="table table-striped table-bordered dt-responsive nowrap">
+                <table id="myTable1" name="myTable1" class="table table-striped table-bordered dt-responsive nowrap">
                     <thead>
                         <tr>
                             <th style="text-align: center" scope="col">&nbsp;</th>
@@ -37,14 +37,15 @@
                             <th>Dirección</th>
                             <th>Teléfono</th>
                             <th>Correo electrónico</th>
+                            <th>No. Matricula</th>
                             <th>CURP o número de pasaporte</th>
                             <th>Periodo para realizar la movilidad</th>
                             <th>Institución de Procedencia</th>
                             <th>Promedio</th>
                             <th>Nombre de tesis</th>
                             <th>Materias a cursar</th>
-                            <th>Solicitud</th>
                             <th>Comentarios</th>
+                            <th>Solicitud</th>
                             <th>Documentos</th>
                         </tr>
                     </thead>
@@ -66,31 +67,28 @@
                             
                             </td>
                             <td>{{ $movilidad->Nombre }} {{ $movilidad->ApellidoP }} {{ $movilidad->ApellidoM }}</td>
-                            <td>{{ $movilidad->Direccion }}</td>
+                            <td>{{$movilidad->Calle}} {{$movilidad->numeroE}}, {{$movilidad->numeroI}} <br> {{$movilidad->ciudad}}, {{$movilidad->estadoDir}} {{$movilidad->codigoP}} <br> {{$movilidad->pais}}</td>
                             <td>{{ $movilidad->TelefonoC }}</td>
                             <td>{{ $movilidad->CorreoE }}</td>
-                            <td> <br> {{ $movilidad->CURP }}</td>
                             <td>
                                 <br>
-                                {{ Carbon\Carbon::parse($movilidad->FechaI)->toFormattedDateString('d-m-Y') }}
-                                /
-                                {{ Carbon\Carbon::parse($movilidad->FechaT)->toFormattedDateString('d-m-Y') }}
+                                {{ $movilidad->Matricula }}
                             </td>
-                            <td> <br> {{ $movilidad->InstitucionD }}</td>
+                            <td> <br> {{ $movilidad->CURP }} {{ $movilidad->Pasaporte }}</td>
+                            <td>
+                                <br>
+                                    @if ($movilidad->Periodo == 1)
+                                        Periodo 1 Enero a Junio
+                                    @else
+                                        Periodo 2 Agosto a Diciembre
+                                    @endif
+                            </td>
+                            <td> <br> {{ $movilidad->InstitucionD }} <br> <b>País de origen:</b> {{ $movilidad->PaisM }}</td>
                             <td> <br> {{ $movilidad->Promedio }}</td>
                             <td> <br> {{ $movilidad->Tesis }}</td>
-                            <td> <br> <textarea name="comentarios" rows="3" cols="100" disabled>{{ $movilidad->Materias }}</textarea></td>
-                            <td>
-                                @if ($movilidad->Estado === 3)
-                                    <a href="/AprobarEstado/{{$movilidad->id}}/2" class="btn btn-default btn-sm">Aprobar</a>
-                                    <a href="/AprobarEstado/{{$movilidad->id}}/3" class="btn btn-danger btn-sm">Rechazar</a>
-                                @elseif ($movilidad->Estado === 2)
-                                    <a href="/AprobarEstado/{{$movilidad->id}}/2" class="btn btn-default btn-sm">Aprobar</a>
-                                    <a href="/AprobarEstado/{{$movilidad->id}}/3" class="btn btn-danger btn-sm">Rechazar</a>
-                                    @elseif ($movilidad->Estado === 1)
-                                        <a href="/AprobarEstado/{{$movilidad->id}}/2" class="btn btn-default btn-sm">Aprobar</a>
-                                        <a href="/AprobarEstado/{{$movilidad->id}}/3" class="btn btn-danger btn-sm">Rechazar</a>
-                                @endif
+                            <td> 
+                                
+                                <br> <textarea name="comentarios" rows="3" cols="100" disabled>{{ $movilidad->Materias }}</textarea>
                             </td>
                             <td>
                                 <form method="POST" action="{{ route('Aprobacion.update', $movilidad->id) }}" class="form-inline" role="form">
@@ -104,8 +102,21 @@
                                 </form> 
                             </td>
                             <td>
+                                @if ($movilidad->Estado === 3)
+                                    <a href="/AprobarEstado/{{$movilidad->id}}/2" class="btn btn-default btn-sm">Aprobar</a>
+                                    <a href="/AprobarEstado/{{$movilidad->id}}/3" class="btn btn-danger btn-sm">Rechazar</a>
+                                @elseif ($movilidad->Estado === 2)
+                                    <a href="/AprobarEstado/{{$movilidad->id}}/2" class="btn btn-default btn-sm">Aprobar</a>
+                                    <a href="/AprobarEstado/{{$movilidad->id}}/3" class="btn btn-danger btn-sm">Rechazar</a>
+                                    @elseif ($movilidad->Estado === 1)
+                                        <a href="/AprobarEstado/{{$movilidad->id}}/2" class="btn btn-default btn-sm">Aprobar</a>
+                                        <a href="/AprobarEstado/{{$movilidad->id}}/3" class="btn btn-danger btn-sm">Rechazar</a>
+                                @endif
+                            </td>
+                            <td>
                                 <br>
                                 <!--prueba-->
+                                <a href="{{asset('storage').'/'.'externa/'.$movilidad->users_id.'/'.$movilidad->Foto}}" onclick="window.open(this.href, 'mywin', 'toolbar=0,menubar=0,scrollbars=1,height=600,width=720'); return false;">Foto</a>
                                 <br>
                                 <a href="{{asset('storage').'/'.'externa/'.$movilidad->users_id.'/'.$movilidad->UniversidadO}}" onclick="window.open(this.href, 'mywin', 'toolbar=0,menubar=0,scrollbars=1,height=600,width=720'); return false;">Oficio de postulación de la Universidad de origen</a>
                                 <br>

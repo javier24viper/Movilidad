@@ -1,7 +1,6 @@
 @extends('welcome')
 @section('content')
 @include('layouts.nav')
-
     <section class="content" >
         <div class="row">
             <div class="col-xs-12">
@@ -15,7 +14,7 @@
             &nbsp;
         </div>
         <div class="col-xs-8">
-        <h4>Solicitudes Internas</h4>
+        <h4>Solicitudes Externas</h4>
         <hr class="red">
         </div>
         <div class="col-xs-2">
@@ -34,6 +33,7 @@
                         <th>Dirección</th>
                         <th>Teléfono</th>
                         <th>Correo electrónico</th>
+                        <th>No. Matricula</th>
                         <th>CURP o Número de pasaporte</th>
                         <th>Periodo para realizar la movilidad</th>
                         <th>Institución de Procedencia</th>
@@ -58,23 +58,35 @@
                             @endif
                         </td>
                         <td>{{ $movilidad->Nombre }} {{ $movilidad->ApellidoP }} {{ $movilidad->ApellidoM }}</td>
-                        <td>{{$movilidad->Calle}} {{$movilidad->numeroE}},  {{$movilidad->numeroI}} <br> {{$movilidad->ciudad}}, {{$movilidad->estadoDir}} {{$movilidad->codigoP}}{{$movilidad->pais}}</td>
+                        <td>{{$movilidad->Calle}} {{$movilidad->numeroE}},  {{$movilidad->numeroI}} <br> {{$movilidad->ciudad}}, {{$movilidad->estadoDir}} {{$movilidad->codigoP}} <br> {{$movilidad->pais}}</td>
                         <td>{{ $movilidad->TelefonoC }}</td>
-                        <td>{{ $movilidad->CorreoE }}</td>
-                        <td> <br> {{ $movilidad->CURP }}</td>
                         <td>
                             <br>
-                            {{ Carbon\Carbon::parse($movilidad->FechaI)->toFormattedDateString('d-m-Y') }}
-                            /
-                            {{ Carbon\Carbon::parse($movilidad->FechaT)->toFormattedDateString('d-m-Y') }}
+                            {{ $movilidad->CorreoE }}
                         </td>
-                        <td> <br> {{ $movilidad->InstitucionD }}</td>
+                        <td>
+                            <br>
+                            {{ $movilidad->Matricula }}
+                        </td>
+                        <td> <br> {{ $movilidad->CURP }} {{ $movilidad->Pasaporte }}</td>
+                        <td>
+                            <br>
+                            @if ($movilidad->Periodo == 1)
+                                Periodo 1 Enero a Junio
+                            @else
+                                Periodo 2 Agosto a Diciembre
+                            @endif
+                           
+                        </td>
+                        <td> <br> {{ $movilidad->InstitucionD }} <br> <b>País de origen:</b> {{ $movilidad->PaisM }} </td>
                         <td> <br> {{ $movilidad->Promedio }}</td>
                         <td> <br> {{ $movilidad->Tesis }}</td>
                         <td> <br> <textarea name="comentarios" rows="3" cols="100" disabled>{{ $movilidad->Materias }}</textarea></td>
                         <td>
                             <br>
                             <!--prueba-->
+                            
+                            <a href="{{asset('storage').'/'.'externa/'.$movilidad->users_id.'/'.$movilidad->Foto}}" onclick="window.open(this.href, 'mywin', 'toolbar=0,menubar=0,scrollbars=1,height=600,width=720'); return false;">Foto</a>
                             <br>
                             <a href="{{asset('storage').'/'.'externa/'.$movilidad->users_id.'/'.$movilidad->UniversidadO}}" onclick="window.open(this.href, 'mywin', 'toolbar=0,menubar=0,scrollbars=1,height=600,width=720'); return false;">Oficio de postulación de la Universidad de origen</a>
                             <br>
@@ -94,10 +106,6 @@
                             <a href="{{asset('storage').'/'.'externa/'.$movilidad->users_id.'/'.$movilidad->DocumentoM}}" onclick="window.open(this.href, 'mywin', 'toolbar=0,menubar=0,scrollbars=1,height=600,width=720'); return false;">Certificado de conocimiento del idioma español</a>
                             <!--fin prueba-->
                         </td>
-                    <!-- <td>
-                            <a href="#" class="btn btn-default btn-sm">Aprobar</a>
-                            <a href="#" class="btn btn-danger btn-sm">Rechazar</a>
-                        </td> -->
                     </tr>
                         
                     @endforeach
@@ -111,7 +119,7 @@
             &nbsp;
         </div>
         <div class="col-xs-8">
-        <h4>Solicitudes Externas</h4>
+        <h4>Solicitudes Internas</h4>
         <hr class="red">
         </div>
         <div class="col-xs-2">
@@ -153,17 +161,34 @@
                             @endif
                         </td>
                         <td>{{ $internas->nombre }} {{ $internas->apellidop }} {{ $internas->apellidom }}</td>
-                        <td>{{$internas->Calle}} {{$internas->numeroE}},  {{$internas->numeroI}} <br> {{$internas->ciudad}}, {{$internas->estadoDir}} {{$internas->codigoP}}{{$internas->pais}}</td>
+                        <td>{{$internas->Calle}} {{$internas->numeroE}},  {{$internas->numeroI}} <br> {{$internas->ciudad}}, {{$internas->estadoDir}} {{$internas->codigoP}} <br> {{$internas->pais}}</td>
                         <td>{{$internas->telefono}}</td>
                         <td>{{$internas->correoE}}</td>
                         <td>{{$internas->curp}}</td>
                         <td>{{$internas->programaO}}</td>
                         <td>{{$internas->programaD}}</td>
-                        <td>{{$internas->periodo}}</td>
+
+                        <td>
+                            @if ($internas->periodo == 1)
+                                Periodo 1 Enero a Junio
+                            @else
+                                Periodo 2 Agosto a Diciembre
+                            @endif
+                        </td>
+
                         <td>{{$internas->promedio}}</td>
                         <td>{{$internas->tesis}}</td>
-                        <td>{{$internas->materias}}</td>
-                        <td></td>
+                        <td>
+                            <br>
+                            <textarea name="comentarios" rows="3" cols="100" disabled>{{ $internas->materias }}</textarea>
+                        </td>
+                        <td>
+                            <br>
+                            <a class="btn btn-default btn-xs active" href="" onclick="window.open(this.href, 'mywin', 'toolbar=0,menubar=0,scrollbars=1,height=600,width=720'); return false;">Exposición de motivos</a>
+                            <br>
+                            <a class="btn btn-default btn-xs active" href="" onclick="window.open(this.href, 'mywin', 'toolbar=0,menubar=0,scrollbars=1,height=600,width=720'); return false;">Historial académico</a>
+                            <br>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

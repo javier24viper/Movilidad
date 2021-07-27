@@ -30,7 +30,7 @@ class movinternas extends Model
         'tesis',
         'materias',
         'cartaM',
-        'historialA'
-        '-Estado'
+        'historialA',
+        'Estado'
       ];
 }
