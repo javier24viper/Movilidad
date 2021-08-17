@@ -42,19 +42,19 @@ class LoginController extends Controller
     protected function credentials(Request $request)
     {
         return [
-            'mail' => $request->get('email'),
+            'uid' => $request->get('username'),
             'password' => $request->get('password'),
         ];
     }
 
     public function username()
     {
-        return 'email';
+        return 'username';
     }
 
     public function authenticate(Request $request){
          // Retrive Input
-         $credentials = $request->only('email', 'password');
+         $credentials = $request->only('username', 'password');
          if (Auth::attempt($credentials)) {
              // si es rol 1 entra a solicitud
              //el rol 1 es para usuarios

@@ -7,8 +7,10 @@ use App\cambio_datos;
 use App\movinternas;
 use App\materias;
 use App\User;
+use App\MAil\MessageReceived;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Storage;
 use File;
 use PDF;
@@ -163,6 +165,7 @@ class SolicitudesController extends Controller
         $rechazado = DB::table('cambio_datos')->where('Estado', '=', 3)->count();
         $movilidad = DB::table('cambio_datos')->where('Estado', '!=', 0)->get();
         
+        
         return view('Listas.ListaAprovada', compact('movilidad','pendientes','aceptado','rechazado'));
     }
      
@@ -182,6 +185,7 @@ class SolicitudesController extends Controller
     public function AprobarEstado($id, $request){
         $movilidad = cambio_datos::all();
         $AprobarCambio = cambio_datos::find($id);
+        //dd($AprobarCambio);
         if($AprobarCambio == NULL){
             Alert::success('No se encontraron datos', 'error!!!')->autoclose(2500);
             return redirect()->route('Aprobacion'); 
@@ -249,9 +253,22 @@ class SolicitudesController extends Controller
         return response()->json($formdata);
     }
 
-    public function update(Request $request, $id){
-       // $update =request()->all();
-       // dd($update);
+    public function correo(Request $request){
+  //      $update =request()->all();
+//        dd($update);
+       // $correo = request()->all();
+     //  dd($correo);
+     $DatosMensaje = request()->all();
+     $Destino = $DatosMensaje['correo-mail'];
+
+       //Mail::to($Destino)->send(new MessageReceived($DatosMensaje));
+
+       return new MessageReceived($DatosMensaje);
+
+       return 'mensaje enviado';
+
+       // Mail::to()
+        /*
         $movilidad = cambio_datos::all();
         $comentario = cambio_datos::findOrFail($id);
         $comentario->Coment = $request->Coment;
@@ -260,6 +277,8 @@ class SolicitudesController extends Controller
         Alert::success('Solicitud enviada', 'Envío Exitoso')->autoclose(2500);
        // return redirect()->route('Solicitud'); 
         return view('Listas.ListaAprovada', compact('movilidad'));
+
+        */
 
     }
 }

@@ -31,6 +31,7 @@
                     <thead>
                         <tr>
                             <th style="text-align: center" scope="col">&nbsp;</th>
+                            <th>Foto</th>
                             <th>PDF</th>
                             <th>Estado de Solicitud</th>
                             <th>Nombre</th>
@@ -53,6 +54,9 @@
                         @foreach ($movilidad as $movilidad)
                         <tr>
                             <td></td>
+                            <td>
+                                <img onclick="javascript:this.width=450;this.height=338" ondblclick="javascript:this.width=100;this.height=80" src="{{asset('storage').'/'.'externa/'.$movilidad->users_id.'/'.$movilidad->Foto}}" width="100"/>
+                            </td>
                             <td>
                                 <a class="btn btn-primary btn-xs" href="/SolicitudPDF/{{$movilidad->id}}"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a>
                             </td>
@@ -91,14 +95,42 @@
                                 <br> <textarea name="comentarios" rows="3" cols="100" disabled>{{ $movilidad->Materias }}</textarea>
                             </td>
                             <td>
-                                <form method="POST" action="{{ route('Aprobacion.update', $movilidad->id) }}" class="form-inline" role="form">
-                                    @method('PUT')	
+                                <form method="POST" action="{{ route('Aprobacion.correo') }}" class="form-inline" role="form">
+                                    {{ csrf_field()}}
                                     @csrf
                                     <div class="form-group">
-                                        <label class="sr-only" for="Comentarios">Comentarios:</label>
-                                        <textarea class="form-control" id="Coment" name="Coment" rows="3"></textarea>
+                                        <div class="form-row">    
+                                            <div class="form-group"> 
+                                                <div>
+                                                    <label class="col-sm-4 control-label" for="para"> Correo:</label>
+                                                    <input class="form-control" type="text" name="correo-mail" id="correo-mail" value="{{ $movilidad->CorreoE }}">
+                                                </div>
+                                                <br>
+                                                <div>
+                                                    <label for="" class="col-sm-4 control-label">Materias:</label>
+                                                    <select id="Denegadas" name="Denegadas[]" multiple class="form-control">
+                                                        @if ($movilidad->Materias != "")
+                                                            @foreach (explode(',', $movilidad->Materias) as $info)
+                                                                <option>{{$info}}</option> 
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                                <br>
+                                                <div>
+                                                    <label class="col-sm-4 control-label" for="asunto">Asunto:</label>
+                                                    <input type="text" name="asunto" id="asunto">
+                                                </div>
+                                                <br>
+                                                <div>    
+                                                    <label class="col-sm-4 control-label" for="Comentarios">Comentarios:</label>
+                                                    <textarea class="form-control" id="Coment" name="Coment" rows="3"></textarea>
+                                                </div>
+                                                <br>
+                                                <button class="btn btn-primary" id="EnvCom" type="submit">Enviar</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                        <button class="btn btn-primary" id="EnvCom" type="submit">Enviar</button>
                                 </form> 
                             </td>
                             <td>
@@ -151,6 +183,18 @@
         <br>
         <br>
     </section>
+    
+<script>
+    $(document).ready(function(){
+        $('#Denegadas').multiselect({
+        nonSelectedText: 'Denegadas',
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true,
+        buttonWidth:'400px'
+        });
+        
+    });
+</script>
 
   
 @endsection

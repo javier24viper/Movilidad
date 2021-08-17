@@ -32,7 +32,8 @@ Route::get("/movilidad", 'SolicitudesController@show')->name('movilidad')->middl
 Route::get("/Aprobacion", 'SolicitudesController@showAprobado')->name('Aprobacion')->middleware('auth');
 Route::get("/UpdateEstado/{id}/{Estado}", 'SolicitudesController@UpdateEstado')->name('UpdateEstado');
 Route::get("/AprobarEstado/{id}/{Estado}", 'SolicitudesController@AprobarEstado')->name('AprobarEstado');
-Route::put('/Aprobacion/{id}/update','SolicitudesController@update' )->name('Aprobacion.update');
+
+Route::post('/Aprobacion/correo','SolicitudesController@correo' )->name('Aprobacion.correo');
 
 Route::get("/interna", 'InternasController@interna')->name('Interna')->middleware('auth');
 Route::post('/InternaStore','InternasController@store')->name('InternaStore');
