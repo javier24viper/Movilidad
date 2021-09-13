@@ -31,6 +31,8 @@ class cambio_datos extends Model
       'PaisM',
       'Tesis',      
       'Materias',
+      'MateriasNA',
+      'MateriasNuevas',
       'Foto',
       'UniversidadO',
       'Motivos',

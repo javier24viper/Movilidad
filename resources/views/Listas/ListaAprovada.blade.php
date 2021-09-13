@@ -106,16 +106,32 @@
                                                     <input class="form-control" type="text" name="correo-mail" id="correo-mail" value="{{ $movilidad->CorreoE }}">
                                                 </div>
                                                 <br>
+                                                <!--
                                                 <div>
                                                     <label for="" class="col-sm-4 control-label">Materias:</label>
                                                     <select id="Denegadas" name="Denegadas[]" multiple class="form-control">
-                                                        @if ($movilidad->Materias != "")
-                                                            @foreach (explode(',', $movilidad->Materias) as $info)
-                                                                <option>{{$info}}</option> 
-                                                            @endforeach
-                                                        @endif
+                                                        if ($movilidad->Materias != "")
+                                                            foreach (explode(',', $movilidad->Materias) as $info)
+                                                                <option>{$info}}</option> 
+                                                            endforeach
+                                                        endif
                                                     </select>
                                                 </div>
+                                            -->
+                                            <div>
+                                                
+                                                @if ($movilidad->Materias != "")
+                                                    @foreach(explode(',', $movilidad->Materias) as $info)
+                                                        <input class="form-check-input" type="checkbox" id="MateriasNA" name="MateriasNA[]" value="{{ $info }}">
+                                                        <label class="form-check-label" id="MateriasNA" name="MateriasNA[]" for="flexCheckDefault">
+                                                            {{$info}}
+                                                        </label>
+                                                        <br>
+                                                        
+                                                    @endforeach 
+                                                @endif
+                                            </div>
+
                                                 <br>
                                                 <div>
                                                     <label class="col-sm-4 control-label" for="asunto">Asunto:</label>

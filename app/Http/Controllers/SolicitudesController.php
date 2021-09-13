@@ -23,7 +23,12 @@ class SolicitudesController extends Controller
         $usuario = auth()->user();
         $rol = $usuario->roles;
         if($rol == '1'){
-            $materia = materias::all();
+            //$materia = materias::all();
+            $materia = DB::table('materias')
+                ->join('posgrados_materias', 'materias.id_materia', '=', 'posgrados_materias.id_materia')
+                ->select('materias.nombre_materia', 'posgrados_materias.creditos')
+                ->get();
+
             return view('/Solicitudes/Solicitud', compact('materia'));
         }
         if($rol == '2'){
@@ -33,7 +38,12 @@ class SolicitudesController extends Controller
             return redirect('Aprobacion');
         }
         else{
-            $materia = materias::all();
+          //  $materia = materias::all();
+            $materia = DB::table('materias')
+                ->join('posgrados_materias', 'materias.id_materia', '=', 'posgrados_materias.id_materia')
+                ->select('materias.nombre_materia', 'posgrados_materias.creditos')
+                ->get();
+            
             return view('/Solicitudes/Solicitud', compact('materia'));
         }
         //dd($rol);
@@ -201,51 +211,24 @@ class SolicitudesController extends Controller
         $id = $respuesta->id;
         $aprobado = DB::table('cambio_datos')
             ->where('users_id', '=', $id)->get();
-        $user_id = $aprobado[0]->users_id;
-        $EstodSolicitud = $aprobado[0]->Estado;
+      //  $user_id = $aprobado[0]->users_id;
+      //  $EstodSolicitud = $aprobado[0]->Estado;
         //$resultado = cambio_datos::all();
        // dd($aprobado);
-       
-        if (Auth::user()->id == $user_id && $EstodSolicitud == 0) {
-            
-            $resultado = 0;
-            $aprobado = DB::table('cambio_datos')
-                ->where('users_id', '=', $id)->get();
-            Alert::success('Su solicitud esta en revisión', 'Gracias')->autoclose(2500);
-            return view('Solicitudes.Respuesta', compact('resultado','aprobado'));
+       $datos = $aprobado[0];
+       //dd($datos);
 
-        }
-        if (Auth::user()->id == $user_id && $EstodSolicitud == 1) {
-            
-            $resultado = 1;
-            $aprobado = DB::table('cambio_datos')
-                ->where('users_id', '=', $id)->get();
-            $mensaje = $aprobado[0];
-            Alert::success('Su solicitud esta en revisión', 'Gracias')->autoclose(2500);
-            return view('Solicitudes.Respuesta', compact('resultado','aprobado', 'mensaje'));
+       $materia = DB::table('materias')
+                ->join('posgrados_materias', 'materias.id_materia', '=', 'posgrados_materias.id_materia')
+                ->select('materias.nombre_materia', 'posgrados_materias.creditos')
+                ->get();
 
-        }
-        if (Auth::user()->id == $user_id && $EstodSolicitud == 2) {
-            
-            $resultado = 2;
-            $aprobado = DB::table('cambio_datos')
-                ->where('users_id', '=', $id)->get();
-            Alert::success('Su solicitud fue', 'Aprobada')->autoclose(2500);
-            return view('Solicitudes.Respuesta', compact('resultado','aprobado'));
-
-        } if(Auth::user()->id == $user_id && $EstodSolicitud == 3) {
-
-            $resultado = 3;
-            $aprobado = DB::table('cambio_datos')
-                ->where('users_id', '=', $id)->get();
-            Alert::success('Su solicitud fue', 'Denegada')->autoclose(2500);
-            return view('Solicitudes.Respuesta', compact('resultado','aprobado'));
-        }
-        $resultado = cambio_datos::all();
-        return view('Solicitudes.Respuesta');
+        //$resultado = cambio_datos::all();
+        return view('Solicitudes.Respuesta', compact('datos', 'materia'));
 
 
     }
+
     public function pruebaG(Request $request){
         //dd($request);
         $formdata = request()->all();
@@ -259,11 +242,17 @@ class SolicitudesController extends Controller
        // $correo = request()->all();
      //  dd($correo);
      $DatosMensaje = request()->all();
+
+     $DatosM = $request->input('MateriasNA');
+     $MateriasNA = implode(", ",$DatosM);
+        //dd($MateriasNA);
+     //dd($DatosMensaje);
      $Destino = $DatosMensaje['correo-mail'];
 
        //Mail::to($Destino)->send(new MessageReceived($DatosMensaje));
 
-       return new MessageReceived($DatosMensaje);
+       return new MessageReceived($DatosMensaje, $MateriasNA);
+     // return view('emails.message-recived', compact('DatosMensaje', 'MateriasNA'));
 
        return 'mensaje enviado';
 

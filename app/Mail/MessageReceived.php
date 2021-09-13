@@ -11,16 +11,18 @@ class MessageReceived extends Mailable
 {
     use Queueable, SerializesModels;
     public $DatosMensaje;
+    public $MateriasNA;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($DatosMensaje)
+    public function __construct($DatosMensaje, $MateriasNA)
     {
         //
         $this->DatosMensaje = $DatosMensaje;
+        $this->MateriasNA = $MateriasNA;
     }
 
     /**

@@ -11,5 +11,6 @@
     <p><strong>Recibiste un mensaje de: </strong>Servicos Escolares</p>
     <p><strong>Asunto: </strong>{{ $DatosMensaje['asunto'] }}</p>
     <p><strong>Contenido: </strong>{{ $DatosMensaje['Coment'] }}</p>
+    <p><strong>Materias no aprobadas</strong>{{ $MateriasNA }}</p>
 </body>
 </html>

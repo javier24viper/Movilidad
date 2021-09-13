@@ -273,7 +273,7 @@
                                 <label for=""> <Span class = "red"> * </span> Propuesta de asignaturas a cursar (Máximo 6 materias)</label>
                                 <select id="Materias" name="Materias[]" multiple class="form-control" >
                                     @foreach ($materia as $materias)
-                                        <option value="{{ $materias->nombre_materia }}">{{ $materias->nombre_materia }}</option>
+                                        <option value="{{ $materias->nombre_materia }}"><b>creditos: </b>{{$materias->creditos}} <b>Nombre materia: </b>{{ $materias->nombre_materia }}</option>
                                     @endforeach
                                 </select>
                                 
